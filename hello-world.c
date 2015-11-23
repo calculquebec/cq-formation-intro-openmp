@@ -1,6 +1,7 @@
 /**
  * Auteur : Frederick Lefebvre <frederick.lefebvre@calculquebec.ca>
- * Date : Aout 2012
+ * Révision : Laurent Duchesne <laurent.duchesne@calculquebec.ca>
+ * Date : Aout 2012, Novembre 2015
  *
  * Historique :
  *   - Version initiale de l'exemple.
@@ -12,14 +13,14 @@
 #include <stdio.h>
 #include <omp.h>
 
-int main(void) {
+int main(void)
+{
     printf("Début de la section parallèle\n");
 
-	#pragma omp parallel
-	{
-        printf("Hello world - fil #%d de %d\n",
-		       omp_get_thread_num(),omp_get_num_threads());
-	}
+    #pragma omp parallel
+    {
+        printf("Hello world - fil #%d de %d\n", omp_get_thread_num(),omp_get_num_threads());
+    }
+
     printf("Fin de la section parallèle\n");
 }
-

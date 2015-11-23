@@ -1,6 +1,7 @@
 /**
  * Auteur : Frederick Lefebvre <frederick.lefebvre@calculquebec.ca>
- * Date : Aout 2012
+ * Révision : Laurent Duchesne <laurent.duchesne@calculquebec.ca>
+ * Date : Aout 2012, Novembre 2015
  * 
  * Historique :
  *   - Version initiale de l'exemple.
@@ -15,20 +16,21 @@
 #include <omp.h>
 #include <unistd.h>
 
-int main(void) {
+int main(void)
+{
     int nbThreads = 0, i = 0;
     printf("Début de la section parallèle\n");
 
-	#pragma omp parallel default(none) shared(nbThreads,i)
-	{
-	   #pragma omp single 
-	     nbThreads = omp_get_num_threads();
-       #pragma omp for
-	     for (i=0 ; i<16 ; ++i) {
-           printf("Hello world - fil #%d de %d a i=%d\n", 
-	              omp_get_thread_num(),nbThreads,i);
-         }
-	}
+    #pragma omp parallel default(none) shared(nbThreads,i)
+    {
+        #pragma omp single
+        nbThreads = omp_get_num_threads();
+
+        #pragma omp for
+        for (i=0 ; i<16 ; ++i) {
+            printf("Hello world - fil #%d de %d a i=%d\n", omp_get_thread_num(),nbThreads,i);
+        }
+    }
+
     printf("Fin de la section parallèle de %d fils\n", nbThreads);
 }
-
