@@ -26,7 +26,12 @@ int partition(double array[], int low, int high){
 
 void quicksort(double array[], int low, int high){
     int pi;
-    if (low < high) {
+    if(high-low <= 0){return;}
+    if(high-low <= 1000){
+        pi = partition(array, low, high);
+        quicksort(array, low, pi - 1);
+        quicksort(array, pi + 1, high);
+    } else {
         pi = partition(array, low, high);
         #pragma omp task shared(array, pi, high)
         quicksort(array, low, pi - 1);
